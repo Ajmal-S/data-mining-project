@@ -6,17 +6,35 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
-<script type="text/javascript" src="data.json"></script>
+<script type="text/javascript" src="common_book_title.js"></script>
+<script type="text/javascript" src="common_book_trope.js"></script>
+<script type="text/javascript" src="common_movie_title.js"></script>
+<script type="text/javascript" src="common_movie_trope.js"></script>
 <body>
 
 <!-- Header -->
 <header class="w3-container w3-theme w3-padding" id="myHeader">
-  <i onclick="w3_open()" class="fa fa-bars w3-xlarge w3-button w3-theme"></i> 
   <div class="w3-center">
-  <h1 class="w3-xxxlarge w3-animate-bottom">Co Clustering Media And Tropes</h1>
+  <h1 class="w3-xxlarge w3-animate-bottom">Co Clustering Media And Tropes</h1>
   </div>
 </header>
 <div class="w3-container">
+  <div id="id01" class="w3-modal">
+    <div class="w3-modal-content">
+      <div class="w3-container">
+        <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+        <p>Please add media from the drop down suggestions.</p>
+      </div>
+    </div>
+  </div>
+  <div id="id02" class="w3-modal">
+    <div class="w3-modal-content">
+      <div class="w3-container">
+        <span onclick="document.getElementById('id02').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+        <p>Please add atleast five books or films for a recommendation.</p>
+      </div>
+    </div>
+  </div>
   <hr>
   <div class="w3-padding w3-white w3-display-container">
     <h2>Introduction</h2>
@@ -209,14 +227,14 @@
 
     <div id="RecBook" class="w3-container city w3-animate-opacity">
       <div class="w3-half">
-          <form class="w3-container w3-card-4">
+          <form class="w3-container w3-card-4" autocomplete="off" onsubmit="myFunction(); return false;">
             <h3 class="w3-center">Input</h3>
             <div class="w3-row">
               <div class="w3-half">
                 <input id="bookclst6" class="w3-radio" type="radio" name="clst" value="bookclst6" checked>
                 <label>Six Clusters</label>
                 <br>
-                <input id="bookclst6" class="w3-radio" type="radio" name="clst" value="bookclst8">
+                <input id="bookclst8" class="w3-radio" type="radio" name="clst" value="bookclst8">
                 <label>Eight Clusters</label>
               </div>            
               <div class="w3-half">
@@ -229,9 +247,9 @@
             </div>
             <br>
             <div class="w3-row">  
-              <button class="w3-btn w3-theme w3-border w3-border-green w3-round-large w3-small" id="AddMediaBooks">Add Media</button>
-              <button class="w3-btn w3-theme w3-border w3-border-green w3-round-large w3-small" id="RecommendBooks">Recommend Books</button>
-              <button class="w3-btn w3-theme w3-border w3-border-green w3-round-large w3-small" id="ClearBooks">Clear</button>     
+              <button class="w3-btn w3-theme w3-border w3-border-green w3-round-large w3-small" onclick="addMediaButton('b')" id="AddMediaBooks">Add Media</button>
+              <button class="w3-btn w3-theme w3-border w3-border-green w3-round-large w3-small" onclick="recommendButton('b')" id="RecommendBooks">Recommend Books</button>
+              <button class="w3-btn w3-theme w3-border w3-border-green w3-round-large w3-small" onclick="clearButton('b')" id="ClearBooks">Clear</button>     
               <br>              
               <input id="mybooks" class="w3-input w3-rest" type="text">              
             </div>
@@ -252,14 +270,14 @@
 
     <div id="RecMovie" class="w3-container city w3-animate-opacity">
       <div class="w3-half">
-        <form class="w3-container w3-card-4">
+        <form class="w3-container w3-card-4" autocomplete="off" onsubmit="myFunction(); return false;">
           <h3 class="w3-center">Input</h3>
           <div class="w3-row">
             <div class="w3-half">
               <input id="moviesclst6" class="w3-radio" type="radio" name="clst" value="moviesclst6" checked>
               <label>Six Clusters</label>
               <br>
-              <input id="moviesclst6" class="w3-radio" type="radio" name="clst" value="moviesclst8">
+              <input id="moviesclst8" class="w3-radio" type="radio" name="clst" value="moviesclst8">
               <label>Eight Clusters</label>
             </div>            
             <div class="w3-half">
@@ -272,9 +290,9 @@
           </div>
           <br>
           <div class="w3-row">  
-            <button class="w3-btn w3-theme w3-border w3-border-green w3-round-large w3-small" id="AddMediaMovies">Add Media</button>
-            <button class="w3-btn w3-theme w3-border w3-border-green w3-round-large w3-small" id="RecommendMovies">Recommend Books</button>
-            <button class="w3-btn w3-theme w3-border w3-border-green w3-round-large w3-small" id="ClearMovies">Clear</button>     
+            <button class="w3-btn w3-theme w3-border w3-border-green w3-round-large w3-small" onclick="addMediaButton('m')" id="AddMediaMovies">Add Media</button>
+            <button class="w3-btn w3-theme w3-border w3-border-green w3-round-large w3-small" onclick="recommendButton('m')" id="RecommendMovies">Recommend Books</button>
+            <button class="w3-btn w3-theme w3-border w3-border-green w3-round-large w3-small" onclick="clearButton('m')" id="ClearMovies">Clear</button>     
             <br>              
             <input class="w3-input w3-rest" type="text">              
           </div>
@@ -297,7 +315,10 @@
 
 <!-- Script for Sidebar, Tabs, Accordions, Progress bars and slideshows -->
 <script>
-function autocomplete(inp, arr1, arr2) {
+MediaForBooks = new Array()
+MediaForMovies = new Array()
+function autocomplete(inp, arr, arr2) {
+  console.log('here')
   /*the autocomplete function takes two arguments,
   the text field element and an array of possible autocompleted values:*/
   var currentFocus;
@@ -321,11 +342,39 @@ function autocomplete(inp, arr1, arr2) {
           /*create a DIV element for each matching element:*/
           b = document.createElement("DIV");
           /*make the matching letters bold:*/
-          b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+          b.innerHTML = "<i>Book : </i>";
+          b.innerHTML += "<b>" + arr[i].substr(0, val.length) + "</b>";
           b.innerHTML += arr[i].substr(val.length);
           /*insert a input field that will hold the current array item's value:*/
-          b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+          var toadd = "Book : " + arr[i]
+          b.innerHTML += "<input type='hidden' value='" + toadd + "'>";
+          b.className = arr[i];
           /*execute a function when someone clicks on the item value (DIV element):*/
+          b.addEventListener("click", function(e) {
+              /*insert the value for the autocomplete text field:*/
+              inp.value = this.getElementsByTagName("input")[0].value;
+              /*close the list of autocompleted values,
+              (or any other open lists of autocompleted values:*/
+              closeAllLists();
+          });
+          a.appendChild(b);
+        }
+      }
+
+      for (i = 0; i < arr2.length; i++) {
+        /*check if the item starts with the same letters as the text field value:*/
+        if (arr2[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+          /*create a DIV element for each matching element:*/
+          b = document.createElement("DIV");
+          /*make the matching letters bold:*/
+          b.innerHTML = "<i>Film : </i>";
+          b.innerHTML += "<b>" + arr2[i].substr(0, val.length) + "</b>";
+          b.innerHTML += arr2[i].substr(val.length);
+          /*insert a input field that will hold the current array item's value:*/
+          var toadd = "Film : " + arr2[i]
+          b.innerHTML += "<input type='hidden' value='" + toadd + "'>";
+          /*execute a function when someone clicks on the item value (DIV element):*/
+          b.className = arr2[i];
           b.addEventListener("click", function(e) {
               /*insert the value for the autocomplete text field:*/
               inp.value = this.getElementsByTagName("input")[0].value;
@@ -394,21 +443,38 @@ function autocomplete(inp, arr1, arr2) {
   });
 }
 
-/*An array containing all the country names in the world:*/
-var countries = ["Afghanistan","Albania","Algeria","Andorra","Angola","Anguilla","Antigua & Barbuda","Argentina","Armenia","Aruba","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bermuda","Bhutan","Bolivia","Bosnia & Herzegovina","Botswana","Brazil","British Virgin Islands","Brunei","Bulgaria","Burkina Faso","Burundi","Cambodia","Cameroon","Canada","Cape Verde","Cayman Islands","Central Arfrican Republic","Chad","Chile","China","Colombia","Congo","Cook Islands","Costa Rica","Cote D Ivoire","Croatia","Cuba","Curacao","Cyprus","Czech Republic","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Eritrea","Estonia","Ethiopia","Falkland Islands","Faroe Islands","Fiji","Finland","France","French Polynesia","French West Indies","Gabon","Gambia","Georgia","Germany","Ghana","Gibraltar","Greece","Greenland","Grenada","Guam","Guatemala","Guernsey","Guinea","Guinea Bissau","Guyana","Haiti","Honduras","Hong Kong","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Isle of Man","Israel","Italy","Jamaica","Japan","Jersey","Jordan","Kazakhstan","Kenya","Kiribati","Kosovo","Kuwait","Kyrgyzstan","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Macau","Macedonia","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Marshall Islands","Mauritania","Mauritius","Mexico","Micronesia","Moldova","Monaco","Mongolia","Montenegro","Montserrat","Morocco","Mozambique","Myanmar","Namibia","Nauro","Nepal","Netherlands","Netherlands Antilles","New Caledonia","New Zealand","Nicaragua","Niger","Nigeria","North Korea","Norway","Oman","Pakistan","Palau","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Puerto Rico","Qatar","Reunion","Romania","Russia","Rwanda","Saint Pierre & Miquelon","Samoa","San Marino","Sao Tome and Principe","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia","Solomon Islands","Somalia","South Africa","South Korea","South Sudan","Spain","Sri Lanka","St Kitts & Nevis","St Lucia","St Vincent","Sudan","Suriname","Swaziland","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Timor L'Este","Togo","Tonga","Trinidad & Tobago","Tunisia","Turkey","Turkmenistan","Turks & Caicos","Tuvalu","Uganda","Ukraine","United Arab Emirates","United Kingdom","United States of America","Uruguay","Uzbekistan","Vanuatu","Vatican City","Venezuela","Vietnam","Virgin Islands (US)","Yemen","Zambia","Zimbabwe"];
-/*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
-autocomplete(document.getElementById("mybooks"), countries);
-/*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
-// Side navigation
-function w3_open() {
-  var x = document.getElementById("mySidebar");
-  x.style.width = "100%";
-  x.style.fontSize = "40px";
-  x.style.paddingTop = "10%";
-  x.style.display = "block";
+var mybtn = document.getElementsByClassName("testbtn")[0];
+mybtn.click();
+
+var bookTitles = new Array(), movieTitles = new Array();
+
+for(var bk in common_book_title){
+  bookTitles.push(common_book_title[bk])
 }
-function w3_close() {
-  document.getElementById("mySidebar").style.display = "none";
+
+for(var mv in common_movie_title){
+  movieTitles.push(common_movie_title[mv])
+}
+
+
+/*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
+autocomplete(document.getElementById("mybooks"), bookTitles, movieTitles);
+/*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
+
+function myFunction() {
+    //do stuff
+}
+
+function addMediaButton(mediaType){
+
+}
+
+function clearButton(mediaType){
+
+}
+
+function recommendButton(mediaType){
+
 }
 
 // Tabs
@@ -426,54 +492,6 @@ function openCity(evt, cityName) {
   evt.currentTarget.className += " w3-dark-grey";
 }
 
-var mybtn = document.getElementsByClassName("testbtn")[0];
-mybtn.click();
-
-// Accordions
-function myAccFunc(id) {
-  var x = document.getElementById(id);
-  if (x.className.indexOf("w3-show") == -1) {
-    x.className += " w3-show";
-  } else { 
-    x.className = x.className.replace(" w3-show", "");
-  }
-}
-
-// Slideshows
-var slideIndex = 1;
-
-function plusDivs(n) {
-  slideIndex = slideIndex + n;
-  showDivs(slideIndex);
-}
-
-function showDivs(n) {
-  var x = document.getElementsByClassName("mySlides");
-  if (n > x.length) {slideIndex = 1}    
-  if (n < 1) {slideIndex = x.length} ;
-  for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none";  
-  }
-  x[slideIndex-1].style.display = "block";  
-}
-
-showDivs(1);
-
-// Progress Bars
-function move() {
-  var elem = document.getElementById("myBar");   
-  var width = 5;
-  var id = setInterval(frame, 10);
-  function frame() {
-    if (width == 100) {
-      clearInterval(id);
-    } else {
-      width++; 
-      elem.style.width = width + '%'; 
-      elem.innerHTML = width * 1  + '%';
-    }
-  }
-}
 </script>
 
 </body>
