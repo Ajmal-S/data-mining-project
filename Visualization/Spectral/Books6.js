@@ -13,7 +13,7 @@ var canvas = document.querySelector("canvas"),
     .alphaTarget(0)
     .alphaDecay(0.05)
 
-var dataset = d3.json("cbdata3.json").then(function(data)
+var dataset = d3.json("cbdata2.json").then(function(data)
 {return data;
 });
 
