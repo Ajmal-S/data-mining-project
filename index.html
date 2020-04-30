@@ -202,27 +202,77 @@
   <h2 class="w3-center">Application - Recommendations</h2>
   <div class="w3-border">
     <div class="w3-bar w3-theme">
-      <button class="w3-bar-item w3-button testbtn w3-padding-16" onclick="openCity(event,'London')">London</button>
-      <button class="w3-bar-item w3-button testbtn w3-padding-16" onclick="openCity(event,'Paris')">Paris</button>
-      <button class="w3-bar-item w3-button testbtn w3-padding-16" onclick="openCity(event,'Tokyo')">Tokyo</button>
+      <button class="w3-bar-item w3-button testbtn w3-padding-16" onclick="openCity(event,'RecBook')">Books Recommendations</button>
+      <button class="w3-bar-item w3-button testbtn w3-padding-16" onclick="openCity(event,'RecMovie')">Movie Recommendations</button>
     </div>
 
-    <div id="London" class="w3-container city w3-animate-opacity">
-      <h2>London</h2>
-      <p>London is the capital city of England.</p>
-      <p>It is the most populous city in the United Kingdom, with a metropolitan area of over 13 million inhabitants.</p>
+    <div id="RecBook" class="w3-container city w3-animate-opacity">
+      <div class="w3-half">
+          <form class="w3-container w3-card-4">
+            <h2>Input Form</h2>
+            <div class="w3-section">      
+              <input class="w3-input" type="text" required>
+              <label>Name</label>
+            </div>
+            <div class="w3-section">      
+              <input class="w3-input" type="text" required>
+              <label>Email</label>
+            </div>
+            <div class="w3-section">      
+              <input class="w3-input" type="text" required>
+              <label>Subject</label>
+            </div>
+          
+            <div class="w3-row">
+              <div class="w3-half">
+                <input id="milk" class="w3-check" type="checkbox" checked="checked">
+                <label>Milk</label>
+                <br>
+                <input id="sugar" class="w3-check" type="checkbox">
+                <label>Sugar</label>
+                <br>
+                <input id="lemon" class="w3-check" type="checkbox" disabled>
+                <label>Lemon (Disabled)</label>
+                <br><br>
+              </div>
+            
+              <div class="w3-half">
+                <input id="male" class="w3-radio" type="radio" name="gender" value="male" checked>
+                <label>Male</label>
+                <br>
+                <input id="female" class="w3-radio" type="radio" name="gender" value="female">
+                <label>Female</label>
+                <br>
+                <input id="unknown" class="w3-radio" type="radio" name="gender" value="" disabled>
+                <label> Don't know (Disabled)</label>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="w3-half">
+        <div class="w3-card-4 w3-container">
+        <h2>Lists</h2>
+        <ul class="w3-ul w3-margin-bottom">
+          <li>Jill</li>
+          <li>Eve</li>
+          <li>Adam</li>
+        </ul>
+        <br>
+        <ul class="w3-ul w3-border w3-hoverable">
+          <li class="w3-theme">Jill</li>
+          <li>Eve</li>
+          <li>Adam</li>
+          <li>Steve</li>
+        </ul>
+        <br>
+        </div>
+      </div>
     </div>
 
-    <div id="Paris" class="w3-container city w3-animate-opacity">
+    <div id="RecMovie" class="w3-container city w3-animate-opacity">
       <h2>Paris</h2>
       <p>Paris is the capital of France.</p> 
       <p>The Paris area is one of the largest population centers in Europe, with more than 12 million inhabitants.</p>
-    </div>
-
-    <div id="Tokyo" class="w3-container city w3-animate-opacity">
-      <h2>Tokyo</h2>
-      <p>Tokyo is the capital of Japan.</p>
-      <p>It is the center of the Greater Tokyo Area, and the most populous metropolitan area in the world.</p>
     </div>
   </div>
 </div>
@@ -456,66 +506,7 @@
 
 <div class="w3-row-padding">
 
-<div class="w3-half">
-<form class="w3-container w3-card-4">
-  <h2>Input Form</h2>
-  <div class="w3-section">      
-    <input class="w3-input" type="text" required>
-    <label>Name</label>
-  </div>
-  <div class="w3-section">      
-    <input class="w3-input" type="text" required>
-    <label>Email</label>
-  </div>
-  <div class="w3-section">      
-    <input class="w3-input" type="text" required>
-    <label>Subject</label>
-  </div>
 
-  <div class="w3-row">
-  <div class="w3-half">
-    <input id="milk" class="w3-check" type="checkbox" checked="checked">
-    <label>Milk</label>
-    <br>
-    <input id="sugar" class="w3-check" type="checkbox">
-    <label>Sugar</label>
-    <br>
-    <input id="lemon" class="w3-check" type="checkbox" disabled>
-    <label>Lemon (Disabled)</label>
-    <br><br>
-  </div>
-
-  <div class="w3-half">
-    <input id="male" class="w3-radio" type="radio" name="gender" value="male" checked>
-    <label>Male</label>
-    <br>
-    <input id="female" class="w3-radio" type="radio" name="gender" value="female">
-    <label>Female</label>
-    <br>
-    <input id="unknown" class="w3-radio" type="radio" name="gender" value="" disabled>
-    <label> Don't know (Disabled)</label>
-  </div>
-  </div>
-</form>
-</div>
-<div class="w3-half">
-<div class="w3-card-4 w3-container">
-<h2>Lists</h2>
-<ul class="w3-ul w3-margin-bottom">
-  <li>Jill</li>
-  <li>Eve</li>
-  <li>Adam</li>
-</ul>
-<br>
-<ul class="w3-ul w3-border w3-hoverable">
-  <li class="w3-theme">Jill</li>
-  <li>Eve</li>
-  <li>Adam</li>
-  <li>Steve</li>
-</ul>
-<br>
-</div>
-</div>
 </div>
 <hr>
 
