@@ -27,6 +27,28 @@
     <p>To put it simply a trope is a recognizable feature used in a story or work. This makes them an ideal avenue to analyse the media being described by. In this project english books and movies are clustered using the data on the tropes present in those books and movies scraped from their pages on the website.</p>
     <p>To consider the distribution of media and the relationships between the tropes as well, Co-Clustering or Bi-Clustering is used for the analysis. Three co-clustering algorithms are applied and the respective results are analysed. Each of the clustering results have been visualized to a force directed graph that supports zoom. The final section of this project are two interactive applications that make use of the clustered data to recommend one media based on another.</p>
   </div>
+  <hr>
+  <div class="w3-padding w3-white w3-display-container">
+    <h2>Co-Clustering</h2>
+    <p>
+      Co-Clustering or Biclustering is a data mining technique which allows for the simultaneous clustering of the rows and columns of matrix like data. It is often applied to gene expression data. Three different co-clustering techniques are applied to the data, the generated clusters of media and tropes are analyzed from a statistical and qualitative standpoint. The trope clusters generated through the clustering is contrasted vs biclustering the tropes independent of the media they are representing by using a vectorized representation of their descriptions. 
+    </p>    
+    <br>
+    <h3>Co-Clustering By Spectral Approximation of the Modularity Matirx</h3>
+    <P>
+      In 2001 Dhillon proposed an co-clustering algorithm that optimized modularity by applying bi-partite spectral graph partitioning to the data. <b>Spectral Graph Partitioning</b> is a heuristic based partitioning technique popularized in the 1990's. The technique is designed to focus partioning around diagonal clusters by mapping the data to a lower dimesion space and clustering within that space. The library selected for clustering implements a recent optimized implemetation on text based data proposed in 2011. 
+    </P>
+    <br>
+    <h3>Co-Clustering By Direct Maximization of Graph Modularity</h3>
+    <P>
+      This is a diagonal clustering technique proposed by Ailem et al., that is available in the python library CoClust. It directly maximizes modularity by using an iterative alternating optimization procedure. 
+    </P>
+    <br>
+    <h3>Information Theoretic Co-Clustering</h3>
+    <P>
+      A novel apporach to co-clustering by Dhillon, et al(2003). framed co-clustering as an optimization problem in information theory. This technique does not attempt to generate a diagonal structure of clustered elements. Instead the approach tries to maximize the mutual information between row and column clusters. In this approach the rows and columns are treated as random variables representing a joint probability distribution. The data is then clustered iteratively into the required number of partitions such that the loss in information in creating the partition is minimized. 
+    </P>
+  </div>
 </div>
 <div class="w3-row-padding w3-center w3-margin-top">
 <div class="w3-third">
