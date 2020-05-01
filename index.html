@@ -294,7 +294,7 @@
             <button class="w3-btn w3-theme w3-border w3-border-green w3-round-large w3-small" onclick="recommendButton('m')" id="RecommendMovies">Recommend Books</button>
             <button class="w3-btn w3-theme w3-border w3-border-green w3-round-large w3-small" onclick="clearButton('m')" id="ClearMovies">Clear</button>     
             <br>              
-            <input class="w3-input w3-rest" type="text">              
+            <input id="mymovies" class="w3-input w3-rest" type="text">              
           </div>
           <div class="w3-section">
             <ul id="AddedMediaMovies" class="w3-ul w3-margin-bottom">
@@ -459,6 +459,7 @@ for(var mv in common_movie_title){
 
 /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
 autocomplete(document.getElementById("mybooks"), bookTitles, movieTitles);
+autocomplete(document.getElementById("mymovies"), bookTitles, movieTitles);
 /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
 
 function myFunction() {
@@ -466,15 +467,107 @@ function myFunction() {
 }
 
 function addMediaButton(mediaType){
-
+    var entryId,entry,entryList,titleDict,targetList;
+    if(mediaType == "b"){
+      entryId = document.getElementById("mybooks");
+      targetList = document.getElementById("AddedMediaBooks");
+      entryList = MediaForBooks;
+    }
+    else{
+      entryId = document.getElementById("mymovies");
+      targetList = document.getElementById("AddedMediaMovies");
+      entryList = MediaForMovies;
+    }
+    entry = entryId.value;
+    if(entry.length <= 7){
+      document.getElementById('id01').style.display='block';
+      entry.value = "";
+    }
+    else{
+      var toadd = new Array();
+      var titleentry = entry.substring(7, entry.length)
+      var foundAny = false;
+      if(entry.substr(0,4) == "Book"){
+        console.log('test')
+        titleDict = common_book_title;
+      }
+      else{
+        titleDict = common_movie_title;
+      }
+      for(var titleKey in titleDict){
+        if(titleDict[titleKey] == titleentry){
+          foundAny = true;
+          if(!entryList.includes(titleKey)){
+            toadd.push(titleKey)
+          }
+        }
+      }
+      if(!foundAny){
+        document.getElementById('id01').style.display='block';
+        entryId.value = "";
+      }
+      else{
+        for(var i =0; i< toadd.length; i++){
+          var tad = toadd[i];
+          entryList.push(tad);
+          var li = document.createElement('li');
+          li.appendChild(document.createTextNode(titleDict[tad]));
+          targetList.appendChild(li);          
+        }
+        entryId.value ="";
+      }
+    }
 }
 
 function clearButton(mediaType){
-
+  var mediaList, mediaListUl, recommendedListUl;
+  if(mediaType == "b"){
+    entryList = MediaForBooks;
+    recommendedListUl = document.getElementById("RecommendedBooks");
+    mediaListUl = document.getElementById("AddedMediaBooks");
+  }
+  else{
+    entryList = MediaForMovies;
+    recommendedListUl = document.getElementById("RecommendedMovies");
+    mediaListUl = document.getElementById("AddedMediaMoives");
+  }
+  recommendedListUl.innerHTML = '';
+  mediaListUl.innerHTML = '',
+  mediaList = new Array();
 }
 
 function recommendButton(mediaType){
-
+  var entryList,recommendedListUl,mediaList;
+  if(mediaType == "b"){
+    entryList = MediaForBooks;
+    recommendedListUl = document.getElementById("RecommendedBooks");    
+  }
+  else{
+    entryList = MediaForMovies;
+    recommendedListUl = document.getElementById("RecommendedMovies");
+  }
+  if(entryList.length < 5){
+    document.getElementById('id02').style.display='block';
+  }
+  else{
+    recommendedListUl.innerHTML = '';
+    var tropesToConsider = new Set();
+    for(var i= 0; i < entryList.length; i++){
+      var mkey = entryList[i];
+      if(mkey in common_book_trope){
+        for(var j = 0; j < common_book_trope[mkey]; j++){
+          tropesToConsider.add(common_book_trope[mkey]);
+        }
+      }
+      if(mkey in common_movie_trope){
+        for(var j = 0; j < common_movie_trope[mkey]; j++){
+          tropesToConsider.add(common_movie_trope[mkey]);
+        }
+      }
+      var tropesToConsiderArray = Array.from(tropesToConsider);
+      
+    }
+  }
 }
 
 // Tabs
