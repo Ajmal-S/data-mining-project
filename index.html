@@ -10,6 +10,22 @@
 <script type="text/javascript" src="common_book_trope.js"></script>
 <script type="text/javascript" src="common_movie_title.js"></script>
 <script type="text/javascript" src="common_movie_trope.js"></script>
+<script type="text/javascript" src="clustered_mod_book_tropes_books_6.js"></script>
+<script type="text/javascript" src="clustered_mod_book_tropes_tropes_6.js"></script>
+<script type="text/javascript" src="clustered_info_book_tropes_books_6.js"></script>
+<script type="text/javascript" src="clustered_info_book_tropes_tropes_6.js"></script>
+<script type="text/javascript" src="clustered_mod_book_tropes_books_8.js"></script>
+<script type="text/javascript" src="clustered_mod_book_tropes_tropes_8.js"></script>
+<script type="text/javascript" src="clustered_info_book_tropes_books_8.js"></script>
+<script type="text/javascript" src="clustered_info_book_tropes_tropes_8.js"></script>
+<script type="text/javascript" src="clustered_mod_movie_tropes_movie_6.js"></script>
+<script type="text/javascript" src="clustered_mod_movie_tropes_tropes_6.js"></script>
+<script type="text/javascript" src="clustered_info_movie_tropes_movie_6.js"></script>
+<script type="text/javascript" src="clustered_info_movie_tropes_tropes_6.js"></script>
+<script type="text/javascript" src="clustered_mod_movie_tropes_movie_8.js"></script>
+<script type="text/javascript" src="clustered_mod_movie_tropes_tropes_8.js"></script>
+<script type="text/javascript" src="clustered_info_movie_tropes_movie_8.js"></script>
+<script type="text/javascript" src="clustered_info_movie_tropes_tropes_8.js"></script>
 <body>
 
 <!-- Header -->
@@ -291,7 +307,7 @@
           <br>
           <div class="w3-row">  
             <button class="w3-btn w3-theme w3-border w3-border-green w3-round-large w3-small" onclick="addMediaButton('m')" id="AddMediaMovies">Add Media</button>
-            <button class="w3-btn w3-theme w3-border w3-border-green w3-round-large w3-small" onclick="recommendButton('m')" id="RecommendMovies">Recommend Books</button>
+            <button class="w3-btn w3-theme w3-border w3-border-green w3-round-large w3-small" onclick="recommendButton('m')" id="RecommendMovies">Recommend Movies</button>
             <button class="w3-btn w3-theme w3-border w3-border-green w3-round-large w3-small" onclick="clearButton('m')" id="ClearMovies">Clear</button>     
             <br>              
             <input id="mymovies" class="w3-input w3-rest" type="text">              
@@ -527,9 +543,10 @@ function clearButton(mediaType){
     mediaListUl = document.getElementById("AddedMediaBooks");
   }
   else{
+    console.log("in")
     entryList = MediaForMovies;
     recommendedListUl = document.getElementById("RecommendedMovies");
-    mediaListUl = document.getElementById("AddedMediaMoives");
+    mediaListUl = document.getElementById("AddedMediaMovies");
   }
   recommendedListUl.innerHTML = '';
   mediaListUl.innerHTML = '',
@@ -537,14 +554,57 @@ function clearButton(mediaType){
 }
 
 function recommendButton(mediaType){
-  var entryList,recommendedListUl,mediaList;
+  var entryList,recommendedListUl,mediaList, recTitles;
+  var tropeDescrClust, mediaClust, tropeClust;
   if(mediaType == "b"){
     entryList = MediaForBooks;
+    recTitles = common_book_title;
     recommendedListUl = document.getElementById("RecommendedBooks");    
+    if(document.getElementById("bookclst6").checked){
+      if(document.getElementById("bookdmax").checked){
+        mediaClust = clustered_mod_book_tropes_books_6;
+        tropeClust = clustered_mod_book_tropes_tropes_6;
+      }
+      else{
+        mediaClust = clustered_info_book_tropes_books_6;
+        tropeClust = clustered_info_book_tropes_tropes_6;
+      }      
+    }
+    else{
+      if(document.getElementById("bookdmax").checked){
+        mediaClust = clustered_mod_book_tropes_books_8;
+        tropeClust = clustered_mod_book_tropes_tropes_8;
+      }
+      else{
+        mediaClust = clustered_info_book_tropes_books_8;
+        tropeClust = clustered_info_book_tropes_tropes_8;
+      } 
+    }
   }
   else{
     entryList = MediaForMovies;
+    recTitles = common_movie_title;
     recommendedListUl = document.getElementById("RecommendedMovies");
+    if(document.getElementById("moviesclst6").checked){
+      if(document.getElementById("moviesdmax").checked){
+        mediaClust = clustered_mod_movie_tropes_movie_6;
+        tropeClust = clustered_mod_movie_tropes_tropes_6;
+      }
+      else{
+        mediaClust = clustered_info_movie_tropes_movie_6;
+        tropeClust = clustered_info_movie_tropes_tropes_6;
+      }      
+    }
+    else{
+      if(document.getElementById("moviesdmax").checked){
+        mediaClust = clustered_mod_movie_tropes_movie_8;
+        tropeClust = clustered_mod_movie_tropes_tropes_8;
+      }
+      else{
+        mediaClust = clustered_info_movie_tropes_movie_8;
+        tropeClust = clustered_info_movie_tropes_tropes_8;
+      } 
+    }
   }
   if(entryList.length < 5){
     document.getElementById('id02').style.display='block';
@@ -552,24 +612,83 @@ function recommendButton(mediaType){
   else{
     recommendedListUl.innerHTML = '';
     var tropesToConsider = new Set();
+    console.log(entryList);
+    console.log(common_book_trope)
     for(var i= 0; i < entryList.length; i++){
       var mkey = entryList[i];
-      if(mkey in common_book_trope){
-        for(var j = 0; j < common_book_trope[mkey]; j++){
-          tropesToConsider.add(common_book_trope[mkey]);
+      console.log(mkey)
+      if(common_book_trope[mkey]!==undefined){
+        console.log('found')
+        for(var j = 0; j < common_book_trope[mkey].length; j++){
+          tropesToConsider.add(common_book_trope[mkey][j]);
         }
       }
-      if(mkey in common_movie_trope){
-        for(var j = 0; j < common_movie_trope[mkey]; j++){
-          tropesToConsider.add(common_movie_trope[mkey]);
+      if(common_movie_trope[mkey] !== undefined){
+        for(var j = 0; j < common_movie_trope[mkey].length; j++){
+          tropesToConsider.add(common_movie_trope[mkey][j]);
         }
       }
-      var tropesToConsiderArray = Array.from(tropesToConsider);
-      
+    }
+    console.log(tropesToConsider)
+    var tropesToConsiderArray = Array.from(tropesToConsider);
+    console.log(tropesToConsiderArray)
+    var arr1 = new Array();
+    var recommendList = new Array();
+    for(var i = 0; i<tropesToConsiderArray.length; i++){
+      arr1.push(tropeClust[tropesToConsiderArray[i]])
+    }
+    var mf = 1;
+    var m = 0;
+    var item;
+    console.log(arr1)
+    for (var i=0; i<arr1.length; i++)
+    {
+      for (var j=i; j<arr1.length; j++)
+      {
+              if (arr1[i] == arr1[j])
+              m++;
+              if (mf<m)
+              {
+                mf=m; 
+                item = arr1[i];
+              }
+      }
+      m=0;
+    }
+    console.log(item)
+    for(var recKey in mediaClust){
+      if(mediaClust[recKey] == item){
+        recommendList.push(recKey);
+      }
+    }
+    recommendList = recommendList.filter(function(dup) {
+      return !entryList.includes(dup); 
+    })
+    var r = getRandom(recommendList, 25);
+    for(var i =0; i < r.length; i++){
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = "https://tvtropes.org" + r[i]
+      a.appendChild(document.createTextNode(recTitles[r[i]]));
+      li.appendChild(a);
+      recommendedListUl.appendChild(li);   
     }
   }
 }
 
+function getRandom(arr, n) {
+    var result = new Array(n),
+        len = arr.length,
+        taken = new Array(len);
+    if (n > len)
+        throw new RangeError("getRandom: more elements taken than available");
+    while (n--) {
+        var x = Math.floor(Math.random() * len);
+        result[n] = arr[x in taken ? taken[x] : x];
+        taken[x] = --len in taken ? taken[len] : len;
+    }
+    return result;
+}
 // Tabs
 function openCity(evt, cityName) {
   var i;
